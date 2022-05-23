@@ -193,6 +193,10 @@ void solve(int (*arr)[9], int seed, bool generating)
 //     exit(0);
 // }
 
+// check if puzzle is solvable and has unique solution 
+//      use solve function to see if it has unique solution
+//      keep count of how many solutions can be found
+//      if count > 1 return false 
 void generatePuzzle()
 {
     int a[9][9];

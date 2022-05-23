@@ -45,7 +45,7 @@ We anticipate the following modules or functions:
 
 ### Pseudo code for logic/algorithmic flow
 
-We anticipate the following modules or functions:
+We anticipate the following modules or functions: (more about algorithm)
 
 1. execute from a command line as shown in the User Interface
 2. parse the command line, validate parameters
@@ -60,7 +60,9 @@ We anticipate the following modules or functions:
 
 The sudoku completes and exits when it has finished solving and printing out the resulting sudoku puzzle.
 
-### Dataflow through modules
+### Dataflow through modules (modulate codes for solve/create possibly)
+
+how array used in each part of algorithm
 
 1. *main* parses parameters and goes to either *generatePuzzle* or *solve*
 2. *generatePuzzle* and then *printGrid*
@@ -77,5 +79,3 @@ The sudoku completes and exits when it has finished solving and printing out the
 *Fuzz testing*. Use the creator to generate **n** puzzles, where **n** is a command-line argument and test solver for these grids. Check the following:
 	- The solution is valid, i.e, it follows Sudoku rules and doesn’t change already filled cells in the grids
 	- The solver checks if each given puzzle has a unique solution (so you are also testing your creator n times).
-
-*Regression testing*.
