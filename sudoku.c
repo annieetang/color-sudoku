@@ -2,16 +2,46 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#define formatBool(b) ((b) ? "true" : "false")
 #include <math.h>
 #include <ctype.h>
 #include <time.h>
 
+#define formatBool(b) ((b) ? "true" : "false")
+
 #include <stdio.h>
 
+/**
+ * possible:
+ * takes a 2d array and x and y coordinates for the grid and a number 1-9 as inputs
+ * returns false if that number can't go in that coordinate point in the grid
+ * because of the numbers in its row, column, or square. otherwise returns true
+ */
 bool possible(int (*arr)[9], int y, int x, int num);
+
+/**
+ * solve:
+ * takes a 2d array, a random seed, and a generating bool as inputs
+ * random seed is used so that the algorithm doesn't give solve the grid in the
+ * same order every time, so that when a puzzle is generated it's random
+ * if bool generating is true it removes a bunch of numbers before printing the
+ * grid at the end
+ * exits execution at the end of the function so that recursion stops solving other solutions
+ */
 void solve(int (*arr)[9], int seed, bool generating);
+
+/**
+ * printGrid:
+ * loops through the 2d sudoku grid and prints the elements
+ * in a grid with spaces in between
+ */
 void printGrid(int (*arr)[9]);
+
+/**
+ * generatePuzzle:
+ * calls solve() on an empty sudoku grid
+ * with generating set to true so that it removes a random amount of
+ * numbers from the grid before printing out the grid
+ */
 void generatePuzzle();
 
 int main(int argc, char const *argv[])
@@ -31,16 +61,6 @@ int main(int argc, char const *argv[])
     if (strcmp(argv[1], "solve") == 0)
     {
         srand(time(NULL));
-        // int a[9][9] = {
-        //     {5, 3, 0, 0, 7, 0, 0, 0, 0},
-        //     {6, 0, 0, 1, 9, 5, 0, 0, 0},
-        //     {0, 9, 8, 0, 0, 0, 0, 6, 0},
-        //     {8, 0, 0, 0, 6, 0, 0, 0, 3},
-        //     {4, 0, 0, 8, 0, 3, 0, 0, 1},
-        //     {7, 0, 0, 0, 2, 0, 0, 0, 6},
-        //     {0, 6, 0, 0, 0, 0, 2, 8, 0},
-        //     {0, 0, 0, 4, 1, 9, 0, 0, 5},
-        //     {0, 0, 0, 0, 8, 0, 0, 7, 9}};
         int a[9][9];
         for (int x = 0; x < 9; x++)
         {
@@ -52,7 +72,6 @@ int main(int argc, char const *argv[])
                 }
             }
         }
-        printf("=================\n");
         solve(a, rand(), false);
         return 0;
     }
@@ -130,7 +149,7 @@ void solve(int (*arr)[9], int seed, bool generating)
 
     if (generating)
     {
-        int maxTimes = 40 + rand() % 20;
+        int maxTimes = 40 + rand() % 24;
         // printf("maxTimes: %d\n", maxTimes);
         for (int times = 0; times < maxTimes; times++)
         {
@@ -147,6 +166,8 @@ void solve(int (*arr)[9], int seed, bool generating)
     printGrid(arr);
     exit(0);
 }
+
+/* old solve before I made it sus */
 // void solve(int (*arr)[9])
 // {
 //     for (int y = 0; y < 9; y++)
