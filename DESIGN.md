@@ -56,7 +56,8 @@ We anticipate the following modules or functions: (more about algorithm)
 		2. if array cell is 0
 		3. check if number 1-9 is possible
 			1. possible returns true if the number is not in that row nor column nor 3x3 block. returns false otherwise
-		4. if it is possible, run solve again recursively
+		4. if it is possible, run solve again recursively on random ȩll
+		5. if solve returns, that means something does not work. thus we set the cell to 0 and try again
 	3. if we are generating a puzzle
 	4. set a certain number of cells to 0, such that we have 40-63 empty cells
 4. If first argument is “solve”,
