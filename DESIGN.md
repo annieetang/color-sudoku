@@ -48,15 +48,25 @@ We anticipate the following modules or functions:
 We anticipate the following modules or functions: (more about algorithm)
 
 1. execute from a command line as shown in the User Interface
-2. parse the command line, validate parameters
+2. parse the command line, validate parameters and checks the number of argumentes
 3. if first argument is “create”,
-	1. Solves an empty sudoku puzzle
-	2. takes some numbers out
-	3. returns unsolved puzzle
+	1. declares a 9x9 array, initializing all cells to 0 
+	2. calls solve:
+		1. start with random row
+		2. if array cell is 0
+		3. check if number 1-9 is possible
+			1. possible returns true if the number is not in that row nor column nor 3x3 block. returns false otherwise
+		4. if it is possible, run solve again recursively
+	3. if we are generating a puzzle
+	4. set a certain number of cells to 0, such that we have 40-63 empty cells
 4. If first argument is “solve”,
 	1. reads 2d array of ints from stdin,
-	2. solves puzzle,
-	3. prints solved puzzle to stdout
+	2. solve puzzle: 
+		1. start with random row
+		2. if array cell is 0
+		3. check if number 1-9 is possible
+			1. possible returns true if the number is not in that row nor column nor 3x3 block. returns false otherwise
+		4. if it is possible, run solve again recursively
 
 The sudoku completes and exits when it has finished solving and printing out the resulting sudoku puzzle.
 
@@ -66,7 +76,7 @@ how array used in each part of algorithm
 
 1. *main* parses parameters and goes to either *generatePuzzle* or *solve*
 2. *generatePuzzle* and then *printGrid*
-3. *solve* uses possible and then *printGrid*
+3. *solve* uses *possible* and then *printGrid*
 
 ### Major data structures
 

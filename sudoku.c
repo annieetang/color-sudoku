@@ -150,7 +150,6 @@ void solve(int (*arr)[9], int seed, bool generating)
     if (generating)
     {
         int maxTimes = 40 + rand() % 24;
-        // printf("maxTimes: %d\n", maxTimes);
         for (int times = 0; times < maxTimes; times++)
         {
             int x = rand() % 9;
