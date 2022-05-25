@@ -44,6 +44,8 @@ void printGrid(int (*arr)[9]);
  */
 void generatePuzzle();
 
+void solutionCounter(int (*arr)[9], int *solutions);
+
 int main(int argc, char const *argv[])
 {
     if (argc != 2)
@@ -157,41 +159,61 @@ void solve(int (*arr)[9], int seed, bool generating)
             int y = rand() % 9;
             if (arr[y][x] != 0)
             {
+                int temp = arr[y][x];
                 arr[y][x] = 0;
+
+                int b[9][9];
+                for (int x0 = 0; x0 < 9; x0++)
+                {
+                    for (int y0 = 0; y0 < 9; y0++)
+                    {
+                        b[y0][x0] = arr[y0][x0];
+                    }
+                }
+
+                int solutions = 0;
+                solutionCounter(b, &solutions);
+                printf("solutions: %d\n", solutions);
+                if (solutions != 1)
+                {
+                    arr[y][x] = temp;
+                    times--;
+                }
                 continue;
             }
             times--;
         }
     }
+    printf("printing the thing\n");
     printGrid(arr);
-    exit(0);
 }
 
 /* old solve before I made it sus */
-// void solve(int (*arr)[9])
-// {
-//     for (int y = 0; y < 9; y++)
-//     {
-//         for (int x = 0; x < 9; x++)
-//         {
-//             if (arr[y][x] == 0)
-//             {
-//                 for (int n = 1; n < 10; n++)
-//                 {
-//                     if (possible(arr, y, x, n))
-//                     {
-//                         arr[y][x] = n;
-//                         solve(arr);
-//                         arr[y][x] = 0;
-//                     }
-//                 }
-//                 return;
-//             }
-//         }
-//     }
-//     printGrid(arr);
-//     exit(0);
-// }
+void solutionCounter(int (*arr)[9], int *solutions)
+{
+    if (*solutions >= 2)
+        return;
+    for (int y = 0; y < 9; y++)
+    {
+        for (int x = 0; x < 9; x++)
+        {
+            if (arr[y][x] == 0)
+            {
+                for (int n = 1; n < 10; n++)
+                {
+                    if (possible(arr, y, x, n))
+                    {
+                        arr[y][x] = n;
+                        solutionCounter(arr, solutions);
+                        arr[y][x] = 0;
+                    }
+                }
+                return;
+            }
+        }
+    }
+    *solutions += 1;
+}
 
 void generatePuzzle()
 {
@@ -203,6 +225,10 @@ void generatePuzzle()
             a[y][x] = 0;
         }
     }
+    int x = rand() % 9;
+    int y = rand() % 9;
+    int n = rand() % 9 + 1;
+    a[y][x] = n;
     int random = rand();
     solve(a, random, true);
 }
