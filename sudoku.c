@@ -152,7 +152,6 @@ void solve(int (*arr)[9], int seed, bool generating)
     if (generating)
     {
         int maxTimes = 40 + rand() % 24;
-        // printf("maxTimes: %d\n", maxTimes);
         for (int times = 0; times < maxTimes; times++)
         {
             int x = rand() % 9;
@@ -215,6 +214,10 @@ void solutionCounter(int (*arr)[9], int *solutions)
     *solutions += 1;
 }
 
+// check if puzzle is solvable and has unique solution 
+//      use solve function to see if it has unique solution
+//      keep count of how many solutions can be found
+//      if count > 1 return false 
 void generatePuzzle()
 {
     int a[9][9];
