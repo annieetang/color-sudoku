@@ -27,7 +27,7 @@ bool possible(int (*arr)[9], int y, int x, int num);
  * grid at the end
  * exits execution at the end of the function so that recursion stops solving other solutions
  */
-void solve(int (*arr)[9]);
+void solve(int (*arr)[9], bool *printedOneSolution);
 
 /**
  * printGrid:
@@ -76,7 +76,8 @@ int main(int argc, char const *argv[])
                 }
             }
         }
-        solve(a);
+        bool printed = false;
+        solve(a, &printed);
         return 0;
     }
 
@@ -159,8 +160,10 @@ void solutionCounter(int (*arr)[9], int *solutions)
     *solutions += 1;
 }
 
-void solve(int (*arr)[9])
+void solve(int (*arr)[9], bool *printedOneSolution)
 {
+    if (*printedOneSolution)
+        return;
     for (int y = 0; y < 9; y++)
     {
         for (int x = 0; x < 9; x++)
@@ -172,7 +175,7 @@ void solve(int (*arr)[9])
                     if (possible(arr, y, x, n))
                     {
                         arr[y][x] = n;
-                        solve(arr);
+                        solve(arr, printedOneSolution);
                         arr[y][x] = 0;
                     }
                 }
@@ -180,6 +183,7 @@ void solve(int (*arr)[9])
             }
         }
     }
+    *printedOneSolution = true;
     printGrid(arr);
 }
 
