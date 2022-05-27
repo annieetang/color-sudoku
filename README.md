@@ -4,4 +4,8 @@
 
 ## Members: Devon Starr, Amanda Sun, Annie Tang
 
-yay
+need to install node first
+mac:
+`brew install node`
+then try `npm start`
+if that doesn't work, `npm install react-scripts --save`
