@@ -2,30 +2,44 @@
 # 
 # Devon Starr, Annie Tang, Amanda Sun, CS50, Spring 2022
 
-PROG = sudoku
-OBJS = sudoku.o 
+PROGS = sudoku
+OBJS = common.o create.o solve.o sudoku.o 
 LIBS = 
 
 CFLAGS = -Wall -pedantic -std=c11 -g -ggdb 
 CC = gcc
 MAKE = make 
 
-$(PROG): $(OBJS) $(LLIBS)
+.PHONY: all clean valgrind unitc units test 
+
+all: sudoku
+
+$(PROGS): $(OBJS) $(LLIBS)
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 
-.PHONY: clean valgrind test
+common.o: common.h 
+create.o: create.h unittestc.h common.h 
+solve.o: solve.h unittests.h common.h
 
-# sudoku:sudoku.o $(LIBS)
-# 	gcc $(CFLAGS) -o $@ $^ -lm
+unittestc: create.c common.c
+	$(CC) $(CFLAGS) -DUNIT_TEST create.c common.c -o $@
+
+unittests: solve.c common.c 
+	$(CC) $(CFLAGS) -DUNIT_TEST solve.c common.c -o $@ 
 
 clean:
 	rm -rf *.dSYM  # MacOS debugger info
 	rm -f *~ *.o
-	rm -f $(PROG)
+	rm -f $(PROGS)
 
-valgrind: $(PROG)
+valgrind: $(PROGS)
 	valgrind --leak-check=full --show-leak-kinds=all ./sudoku create | ./sudoku solve
-# valgrind --leak-check=full --show-leak-kinds=all ./sudoku create > output | ./sudoku solve < output
 
-test: $(PROG)
+unitc: unittestc
+	./unittestc
+
+units: unittests
+	./unittests
+
+test: $(PROGS)
 	./sudoku create | ./sudoku solve
