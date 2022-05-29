@@ -84,10 +84,10 @@ int main(int argc, char const *argv[])
     return 2;
 }
 
-static inline int min(const int a, const int b)
-{
-    return (a < b ? a : b);
-}
+// static inline int min(const int a, const int b)
+// {
+//     return (a < b ? a : b);
+// }
 
 void printGrid(int (*arr)[9])
 {
@@ -319,3 +319,11 @@ void generatePuzzleHelper(int (*arr)[9], bool *created)
     }
     printGrid(arr);
 }
+
+/********************************************************
+ **************** unit testing **************************
+ ********************************************************/
+
+#ifdef UNIT_TEST
+
+#endif // UNIT_TEST

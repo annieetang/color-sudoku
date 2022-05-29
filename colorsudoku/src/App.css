@@ -43,12 +43,43 @@ td, tr, tbody, table {
 }
 
 .cell {
-    width: min(5vw,5vh);
-    height: min(5vw,5vh);
-    background-color: gray;
-    padding:0px;
-    border: min(.2vw,.2vh) solid;
-    
+  width: min(5vw,5vh);
+  height: min(5vw,5vh);
+  background-color: gray;
+  padding:0px;
+  border: min(.2vw,.2vh) solid;
+}
+
+.buttonContainer {
+  margin-top: 40px;
+}
+
+.solveButton {
+    background-color: aquamarine;
+    font-weight: bold; 
+    padding: 12px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    margin: 0px 20px;
+}
+
+.createButton {
+    background-color: plum;
+    font-weight: bold; 
+    padding: 12px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.resetButton {
+    background-color: palevioletred;
+    font-weight: bold; 
+    padding: 12px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
 }
 
 .board {

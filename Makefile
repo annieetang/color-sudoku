@@ -1,21 +1,31 @@
+# Makefile for 'sudoku' file 
+# 
+# Devon Starr, Annie Tang, Amanda Sun, CS50, Spring 2022
+
+PROG = sudoku
+OBJS = sudoku.o 
 LIBS = 
+
 CFLAGS = -Wall -pedantic -std=c11 -g -ggdb 
+CC = gcc
+MAKE = make 
 
-.PHONY: all clean valgrind test
+$(PROG): $(OBJS) $(LLIBS)
+	$(CC) $(CFLAGS) $^ -o $@ -lm
 
-all: sudoku
+.PHONY: clean valgrind test
 
-sudoku:sudoku2.o $(LIBS)
-	gcc $(CFLAGS) -o $@ $^ -lm
+# sudoku:sudoku.o $(LIBS)
+# 	gcc $(CFLAGS) -o $@ $^ -lm
 
 clean:
-	rm -f sudoku
-	rm -f sudoku2.o
+	rm -rf *.dSYM  # MacOS debugger info
+	rm -f *~ *.o
+	rm -f $(PROG)
 
-valgrind:
-	make
+valgrind: $(PROG)
 	valgrind --leak-check=full --show-leak-kinds=all ./sudoku create | ./sudoku solve
+# valgrind --leak-check=full --show-leak-kinds=all ./sudoku create > output | ./sudoku solve < output
 
-test:
-	make
+test: $(PROG)
 	./sudoku create | ./sudoku solve
