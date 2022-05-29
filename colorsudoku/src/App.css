@@ -51,20 +51,21 @@ td, tr, tbody, table {
 }
 
 .buttonContainer {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .solveButton {
-    background-color: orange;
+    background-color: aquamarine;
     font-weight: bold; 
     padding: 12px 20px;
     border: none;
     border-radius: 20px;
     font-size: 14px;
+    margin: 0px 20px;
 }
 
-.checkButton {
-    background-color: tomato;
+.createButton {
+    background-color: plum;
     font-weight: bold; 
     padding: 12px 20px;
     border: none;
@@ -73,7 +74,7 @@ td, tr, tbody, table {
 }
 
 .resetButton {
-    background-color: teal;
+    background-color: palevioletred;
     font-weight: bold; 
     padding: 12px 20px;
     border: none;

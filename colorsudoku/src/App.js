@@ -97,6 +97,21 @@ function App() {
         setSelected({ row: row, column: column });
     }
 
+    // function to create sudoku 
+    function createSudoku() {
+
+    }
+
+    // function to solve sudoku
+    function solveSudoku() {
+        
+    }
+
+    // function to reset sudoku
+    function resetSudoku() {
+        
+    }
+
     return (
         <div className="App" tabIndex={0} onKeyDown={handleKeyPress}>
             <div className="App-header">
@@ -133,10 +148,11 @@ function App() {
                         </tr>
                     </tbody>
                 </table>
+                {/* create buttons  */}
                 <div className="buttonContainer">
-                    <button className="checkButton">Check</button>
-                    <button className="solveButton">Solve</button>
-                    <button className="resetButton">Reset</button>
+                    <button className="createButton" onClick="createSudoku">Create</button>
+                    <button className="solveButton" onClick="solveSudoku">Solve</button>
+                    <button className="resetButton" onClick="resetSudoku">Reset</button>
                 </div>
             </div>
         </div>
