@@ -133,6 +133,11 @@ function App() {
                         </tr>
                     </tbody>
                 </table>
+                <div className="buttonContainer">
+                    <button className="checkButton">Check</button>
+                    <button className="solveButton">Solve</button>
+                    <button className="resetButton">Reset</button>
+                </div>
             </div>
         </div>
     );
