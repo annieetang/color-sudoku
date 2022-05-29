@@ -1,20 +1,36 @@
 #!/bin/bash
 
 fails=0
-
+echo ""
 echo "******************* sudoku tester *******************"
-./sudoku create | ./sudoku solve > "testfiles/result.txt"
+# ./sudoku create | ./sudoku solve > "testfiles/result.txt"
 
-vi "testfiles/sol2.txt"
+echo "***generating and solving 10 sudokus using ./sudoku create | ./sudoku solve***"
+echo "***  delaying one second each time to refresh the random number generator  ***"
+for i in {1..10}
+do
+   echo "Creating sudoku $i..."
+   ./sudoku create | tee testfiles/temp # tee prints to stdout and also to a file
+   sleep 0.5
+   echo ""
 
-"testfiles/input2.txt" > ./sudoku solve > "testfiles/sol2.txt"
+   echo "Solving sudoku $i..."
+   ./sudoku solve < testfiles/temp
+   sleep 0.5
+   echo ""
+done
 
-diff -q --brief "testfiles/comp2.txt" "testfiles/sol2.txt"
-if [ $? != 0 ]; 
-then 
-    echo "<< Test $i Failed>>"
-    fails=$fails+1
-fi
+
+# vi "testfiles/sol2.txt"
+
+# "testfiles/input2.txt" > ./sudoku solve > "testfiles/sol2.txt"
+
+# diff -q --brief "testfiles/comp2.txt" "testfiles/sol2.txt"
+# if [ $? != 0 ]; 
+# then 
+#     echo "<< Test $i Failed>>"
+#     fails=$fails+1
+# fi
 
 #3324
 # ./sudoku solve
