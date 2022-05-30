@@ -21,6 +21,11 @@
  */
 void solve(int (*arr)[9], bool *printedOneSolution);
 
+/*
+ * solve, and print into a file
+ *
+ */
+void solve_into_file(int (*arr)[9], bool *printedOneSolution, char *filename);
 /* 
  * checkGrid: 
  * checks if the grid inputted to solve is valid 

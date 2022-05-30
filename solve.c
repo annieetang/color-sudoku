@@ -1,6 +1,6 @@
-/* 
+/*
  * solve.h - file that contains functions to solve a sudoku
- * 
+ *
  * Devon Starr, Annie Tang, Amanda Sun, CS50 Spring 2022
  */
 
@@ -10,37 +10,42 @@
 #include "unittests.h"
 #include "common.h"
 
-/* see solve.h for description */ 
-bool checkGrid(int (*arr)[9]) {
+/* see solve.h for description */
+bool checkGrid(int (*arr)[9])
+{
 
-    for (int x = 0; x < 9; x++) {
-        for (int y = 0; y < 9; y++) {
+    for (int x = 0; x < 9; x++)
+    {
+        for (int y = 0; y < 9; y++)
+        {
 
-            if (arr[y][x] < 0 || arr[y][x] > 9) {
+            if (arr[y][x] < 0 || arr[y][x] > 9)
+            {
                 return false;
             }
         }
     }
 
-    return true; 
+    return true;
 }
 
-/* see solve.h for description */ 
+/* see solve.h for description */
 void solve(int (*arr)[9], bool *printedOneSolution)
-{  
-
+{
     // check if valid grid
-    if (!checkGrid(arr)) {
+    if (!checkGrid(arr))
+    {
         fprintf(stderr, "Invalid grid. Values must be betwen 0-9 \n");
         return;
     }
 
     // check if there's already a solution printed for array
-    if (*printedOneSolution) {
+    if (*printedOneSolution)
+    {
         return;
     }
 
-    // loop through the array, perform backtracking and test possibe solutions
+    // loop through 2d array, trying numbers 1-9 on each cell and recursively calling solve again
     for (int y = 0; y < 9; y++)
     {
         for (int x = 0; x < 9; x++)
@@ -60,11 +65,54 @@ void solve(int (*arr)[9], bool *printedOneSolution)
             }
         }
     }
-    
+
     // set printed bool to true and print the grid
     *printedOneSolution = true;
     printf("Solved sudoku:\n");
     printGrid(arr);
+}
+
+
+/* see solve.h for description */
+void solve_into_file(int (*arr)[9], bool *printedOneSolution, char *filename)
+{   
+    // check if valid grid
+    if (!checkGrid(arr))
+    {
+        fprintf(stderr, "Invalid grid. Values must be betwen 0-9 \n");
+        return;
+    }
+
+    // check if there's already a solution printed for array
+    if (*printedOneSolution)
+    {
+        return;
+    }
+
+    // loop through 2d array, trying numbers 1-9 on each cell and recursively calling solve again
+    for (int y = 0; y < 9; y++)
+    {
+        for (int x = 0; x < 9; x++)
+        {
+            if (arr[y][x] == 0)
+            {
+                for (int n = 1; n < 10; n++)
+                {
+                    if (possible(arr, y, x, n))
+                    {
+                        arr[y][x] = n;
+                        solve_into_file(arr, printedOneSolution, filename);
+                        arr[y][x] = 0;
+                    }
+                }
+                return;
+            }
+        }
+    }
+    // set printed bool to true and print the grid
+    *printedOneSolution = true; 
+    printGrid_into_file(arr, filename);
+    
 }
 
 /********************************************************
@@ -73,11 +121,12 @@ void solve(int (*arr)[9], bool *printedOneSolution)
 
 #ifdef UNIT_TEST
 
-// hard-coded sudoku puzzle 
-int test_sudokusolve0() {
+// hard-coded sudoku puzzle
+int test_sudokusolve0()
+{
     START_TEST_CASE("sudokusolve0");
 
-    int a[9][9] = { 
+    int a[9][9] = {
         {8, 5, 6, 3, 0, 0, 7, 0, 4},
         {0, 0, 0, 0, 4, 0, 3, 0, 0},
         {0, 3, 4, 9, 0, 0, 6, 5, 1},
@@ -86,44 +135,44 @@ int test_sudokusolve0() {
         {0, 0, 0, 0, 0, 7, 0, 0, 0},
         {5, 0, 0, 7, 0, 0, 8, 0, 0},
         {7, 1, 0, 4, 0, 2, 5, 3, 0},
-        {6, 0, 0, 8, 0, 0, 4, 7, 0} 
-    };
+        {6, 0, 0, 8, 0, 0, 4, 7, 0}};
 
-    bool printed = false; 
-    solve(a, &printed); 
-
-    END_TEST_CASE; 
-    return TEST_RESULT; 
-}
-
-// try to solve where a solution was already printed 
-int test_sudokusolve1() {
-    START_TEST_CASE("sudokusolve1");
-
-    int a[9][9] = { 
-        {8, 5, 6, 3, 0, 0, 7, 0, 4},
-        {0, 0, 0, 0, 4, 0, 3, 0, 0},
-        {0, 3, 4, 9, 0, 0, 6, 5, 1},
-        {0, 0, 0, 1, 0, 0, 9, 0, 7},
-        {0, 8, 0, 0, 0, 3, 2, 4, 0},
-        {0, 0, 0, 0, 0, 7, 0, 0, 0},
-        {5, 0, 0, 7, 0, 0, 8, 0, 0},
-        {7, 1, 0, 4, 0, 2, 5, 3, 0},
-        {6, 0, 0, 8, 0, 0, 4, 7, 0} 
-    };
-
-    bool printed = true; 
+    bool printed = false;
     solve(a, &printed);
 
-    END_TEST_CASE; 
-    return TEST_RESULT; 
+    END_TEST_CASE;
+    return TEST_RESULT;
+}
+
+// try to solve where a solution was already printed
+int test_sudokusolve1()
+{
+    START_TEST_CASE("sudokusolve1");
+
+    int a[9][9] = {
+        {8, 5, 6, 3, 0, 0, 7, 0, 4},
+        {0, 0, 0, 0, 4, 0, 3, 0, 0},
+        {0, 3, 4, 9, 0, 0, 6, 5, 1},
+        {0, 0, 0, 1, 0, 0, 9, 0, 7},
+        {0, 8, 0, 0, 0, 3, 2, 4, 0},
+        {0, 0, 0, 0, 0, 7, 0, 0, 0},
+        {5, 0, 0, 7, 0, 0, 8, 0, 0},
+        {7, 1, 0, 4, 0, 2, 5, 3, 0},
+        {6, 0, 0, 8, 0, 0, 4, 7, 0}};
+
+    bool printed = true;
+    solve(a, &printed);
+
+    END_TEST_CASE;
+    return TEST_RESULT;
 }
 
 // input grid with values > 9
-int test_sudokusolve2() {
+int test_sudokusolve2()
+{
     START_TEST_CASE("sudokusolve2");
 
-    int a[9][9] = { 
+    int a[9][9] = {
         {8, 5, 6, 3, 0, 0, 799, 0, 4},
         {0, 0, 0, 0, 4, 0, 3, 0, 0},
         {0, 3, 43, 9, 0, 0, 6, 5, 1},
@@ -132,30 +181,32 @@ int test_sudokusolve2() {
         {0, 0, 0, 0, 0, 7, 0, 0, 0},
         {5, 0, 0, 7, 0, 0, 8, 0, 0},
         {7, 1, 0, 4, 0, 288, 5, 3, 0},
-        {6, 0, 0, 8, 0, 0, 4, 7, 0} 
-    };
+        {6, 0, 0, 8, 0, 0, 4, 7, 0}};
 
-    bool printed = false; 
-    solve(a, &printed); 
+    bool printed = false;
+    solve(a, &printed);
 
-    END_TEST_CASE; 
-    return TEST_RESULT; 
+    END_TEST_CASE;
+    return TEST_RESULT;
 }
 
-int main(const int argc, const char *argv[]) {
-    int failed = 0; 
+int main(const int argc, const char *argv[])
+{
+    int failed = 0;
 
-    failed += test_sudokusolve0(); 
-    failed += test_sudokusolve1(); 
+    failed += test_sudokusolve0();
+    failed += test_sudokusolve1();
     failed += test_sudokusolve2();
 
-    if (failed) {
+    if (failed)
+    {
         printf("FAIL %d test cases\n", failed);
-        return failed; 
+        return failed;
     }
-    else {
+    else
+    {
         printf("PASS all test cases\n");
-        return 0; 
+        return 0;
     }
 }
 
