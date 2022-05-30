@@ -38,8 +38,8 @@
 }
 
 td, tr, tbody, table {
-    margin:0px;
-    padding:0px;
+    margin:0;
+    padding:0;
 }
 
 .cell {
@@ -47,39 +47,38 @@ td, tr, tbody, table {
   height: min(5vw,5vh);
   background-color: gray;
   padding:0px;
-  border: min(.2vw,.2vh) solid;
+  border: min(.3vw,.3vh) solid lightgray;
 }
 
 .buttonContainer {
-  margin-top: 40px;
+  margin:0;
 }
 
-.solveButton {
-    background-color: aquamarine;
+.buttonContainer button {
     font-weight: bold; 
-    padding: 12px 20px;
-    border: none;
-    border-radius: 20px;
-    font-size: 14px;
-    margin: 0px 20px;
+    padding: min(1.4vw,1.4vh) min(2.4vw,2.4vh);
+    border: min(.3vw,.3vh) solid lightgray;
+    border-radius: min(2vw,2vh);
+    margin: min(1vw,1vh);
+    font-size: min(1.8vw,1.8vh);
+    background-color: rgb(72, 37, 107);
+    color: white;
 }
 
-.createButton {
-    background-color: plum;
-    font-weight: bold; 
-    padding: 12px 20px;
-    border: none;
-    border-radius: 20px;
-    font-size: 14px;
+.titleText {
+    margin:0px;
+    font-size: min(5vw,5vh);
 }
 
-.resetButton {
-    background-color: palevioletred;
-    font-weight: bold; 
-    padding: 12px 20px;
-    border: none;
-    border-radius: 20px;
-    font-size: 14px;
+.infoText {
+    margin:0;
+    color:lightgray;
+}
+
+.paletteText {
+    margin-bottom: .2vh;
+    margin-top: 1vh;
+    font-size: min(2.5vw,2.5vh);
 }
 
 .board {
