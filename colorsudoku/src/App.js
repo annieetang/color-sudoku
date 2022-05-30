@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import React, { useState } from 'react';
 import './App.css';
 
@@ -120,7 +119,7 @@ function App() {
             }
         }
         printedOneSolution.bool = true;
-        printGrid(arr);
+        // printGrid(arr);
         setPuzzle(getDeepCopy(arr));
 
     }
@@ -222,7 +221,7 @@ function App() {
             }
             times++;
         }
-        printGrid(arr);
+        // printGrid(arr);
         setPuzzle(getDeepCopy(arr));
         setGrid(getDeepCopy(arr));
     }
@@ -271,14 +270,14 @@ function App() {
     function checkSudoku() {
         let int = { solutions: 0 };
         let tempGrid = getDeepCopy(puzzle);
-        solutionCounter(puzzle, int);
+        solutionCounter(tempGrid, int);
         if (int.solutions === 0) {
             setInfoText("No solution. Hit reset to try again!");
         } else {
             let filled = true;
             for (let x = 0; x < 9; x++) {
                 for (let y = 0; y < 9; y++) {
-                    if (puzzle[y][x] == 0) filled = false;
+                    if (puzzle[y][x] === 0) filled = false;
                 }
             }
             if (filled === true) {
@@ -293,7 +292,7 @@ function App() {
     return (
         <div className="App">
             <div className="App-header">
-                <h3 className="titleText"> Color Sudoku!!!</h3>
+                <h3 className="titleText"> Color Sudoku.</h3>
                 <h4 className='infoText'>{infoText}</h4>
                 <div className="buttonContainer">
                     <button className="createButton" onClick={createSudoku}>Create</button>
