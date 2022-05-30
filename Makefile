@@ -42,4 +42,4 @@ units: unittests
 	./unittests
 
 test: $(PROGS)
-	./sudoku create | ./sudoku solve
+	./testing.sh

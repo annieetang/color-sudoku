@@ -1,13 +1,14 @@
 #!/bin/bash
 
-fails=0
 echo ""
 echo "******************* sudoku tester *******************"
 # ./sudoku create | ./sudoku solve > "testfiles/result.txt"
 
 echo "***generating and solving 10 sudokus using ./sudoku create | ./sudoku solve***"
 echo "***  delaying one second each time to refresh the random number generator  ***"
-for i in {1..10}
+echo "Enter number of iterations: "
+read END
+for i in $(seq 1 $END);
 do
    echo "Creating sudoku $i..."
    ./sudoku create | tee testfiles/temp # tee prints to stdout and also to a file
@@ -19,57 +20,24 @@ do
    sleep 0.5
    echo ""
 done
-
-
-# vi "testfiles/sol2.txt"
-
-# "testfiles/input2.txt" > ./sudoku solve > "testfiles/sol2.txt"
-
-# diff -q --brief "testfiles/comp2.txt" "testfiles/sol2.txt"
-# if [ $? != 0 ]; 
-# then 
-#     echo "<< Test $i Failed>>"
-#     fails=$fails+1
-# fi
-
+echo "******************* hardcoded sudoku tester, only prints if failed *******************"
 #3324
-# ./sudoku solve
-# 6 5 8 0 0 0 0 7 0
-# 0 7 0 0 5 0 8 0 0
-# 0 3 9 0 0 0 5 4 0
-# 0 0 2 6 0 5 0 0 7
-# 0 6 0 9 7 4 0 0 0
-# 7 0 0 3 0 0 6 0 0 
-# 0 4 6 0 0 0 2 5 0
-# 0 0 7 0 6 0 0 0 0
-# 0 0 0 0 0 0 7 6 8
-# | > "testfiles/sol3.txt"
+./sudoku solvefile testfiles/output1.txt < testfiles/input1.txt
 
-# diff -q --brief "testfiles/comp3.txt" "testfiles/sol3.txt"
-# if [ $? != 0 ]; 
-# then 
-#     echo "<< Test $i Failed>>"
-#     fails=$fails+1
-# fi
+diff -w "testfiles/output1.txt" "testfiles/answer1.txt" || echo "<< Test 1 Failed>>"
 
-# #9378
-# ./sudoku solve
-# 0 0 0 0 0 8 0 3 1
-# 7 3 0 6 0 0 0 0 0
-# 0 0 0 3 4 0 9 0 2
-# 3 0 0 0 0 0 0 0 0
-# 5 0 0 0 0 0 8 0 3
-# 0 0 6 1 3 0 0 0 0
-# 0 0 2 0 0 4 3 0 0
-# 4 0 3 2 7 0 0 0 0
-# 0 9 0 5 0 0 0 0 6
-# | > "testfiles/sol4.txt"
+#9378
+./sudoku solvefile testfiles/output2.txt < testfiles/input2.txt
+diff -w "testfiles/output2.txt" "testfiles/answer2.txt" || echo "<< Test 2 Failed>>"
 
-# diff -q --brief "testfiles/comp4.txt" "testfiles/sol4.txt"
-# if [ $? != 0 ]; 
-# then 
-#     echo "<< Test $i Failed>>"
-#     fails=$fails+1
-# fi
+# from https://sandiway.arizona.edu/sudoku/examples.html, Daily Telegraph January 19th "Diabolical"
+./sudoku solvefile testfiles/output3.txt < testfiles/input3.txt
+diff -w "testfiles/output3.txt" "testfiles/answer3.txt" || echo "<< Test 3 Failed>>"
 
-echo $fails
+# from https://sandiway.arizona.edu/sudoku/examples.html, Vegard Hanssen puzzle 2155141
+./sudoku solvefile testfiles/output4.txt < testfiles/input4.txt
+diff -w "testfiles/output4.txt" "testfiles/answer4.txt" || echo "<< Test 4 Failed>>"
+
+# from https://sandiway.arizona.edu/sudoku/examples.html, Challenge 2 from Sudoku Solver by Logic
+./sudoku solvefile testfiles/output5.txt < testfiles/input5.txt
+diff -w "testfiles/output5.txt" "testfiles/answer5.txt" || echo "<< Test 5 Failed>>"

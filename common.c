@@ -21,6 +21,39 @@ void printGrid(int (*arr)[9])
     }
 }
 
+bool w_file(char *filename) 
+{
+    FILE *fp;
+    if ((fp = fopen(filename, "w")) == NULL) {
+        fprintf(stderr, "Cannot write into file.");
+        return false;
+    } else {
+        fclose(fp);
+        return true;
+    }
+}
+
+/* see common.h for descriptions */
+void printGrid_into_file(int (*arr)[9], char * filename)
+{
+    FILE *fp;
+    if ((fp = fopen(filename, "w")) == NULL) {
+        fprintf(stderr, "Cannot write into file.");
+        return;
+    }
+        
+    for (int x = 0; x < 9; x++)
+    {
+        for (int y = 0; y < 9; y++)
+        {
+            fprintf(fp, "%d ", arr[y][x]);
+        }
+        fprintf(fp, "\n");
+    }
+
+    fclose(fp);
+}
+
 /* see common.h for descriptions */
 bool possible(int (*arr)[9], int y, int x, int num)
 {
