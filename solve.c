@@ -68,14 +68,12 @@ void solve(int (*arr)[9], bool *printedOneSolution)
 
     // set printed bool to true and print the grid
     *printedOneSolution = true;
-    printf("Solved sudoku:\n");
     printGrid(arr);
 }
 
-
 /* see solve.h for description */
 void solve_into_file(int (*arr)[9], bool *printedOneSolution, char *filename)
-{   
+{
     // check if valid grid
     if (!checkGrid(arr))
     {
@@ -110,9 +108,8 @@ void solve_into_file(int (*arr)[9], bool *printedOneSolution, char *filename)
         }
     }
     // set printed bool to true and print the grid
-    *printedOneSolution = true; 
+    *printedOneSolution = true;
     printGrid_into_file(arr, filename);
-    
 }
 
 /********************************************************
