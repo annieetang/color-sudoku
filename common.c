@@ -1,6 +1,6 @@
-/* 
+/*
  * common.h - file that contains functions shared by create and solve
- * 
+ *
  * Devon Starr, Annie Tang, Amanda Sun, CS50 Spring 2022
  */
 
@@ -24,16 +24,22 @@ void printGrid(int (*arr)[9])
 /* see common.h for descriptions */
 bool possible(int (*arr)[9], int y, int x, int num)
 {
+    // checking row to make sure the number is possible in the row
     for (int i = 0; i < 9; i++)
     {
         if (arr[y][i] == num)
             return false;
     }
+
+    // checking column to make sure the number is possible in the column
     for (int i = 0; i < 9; i++)
     {
         if (arr[i][x] == num)
             return false;
     }
+
+    // checking square to make sure the number is possible in the square
+    // uses int division and 2 for loops to loop over every item in the square x,y is in
     int x0 = (int)(x / 3) * 3;
     int y0 = (int)(y / 3) * 3;
     for (int i = 0; i < 3; i++)
@@ -44,5 +50,7 @@ bool possible(int (*arr)[9], int y, int x, int num)
                 return false;
         }
     }
+
+    // if none of the checks returned false, returns true at end!!
     return true;
 }
