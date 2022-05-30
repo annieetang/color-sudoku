@@ -1,6 +1,6 @@
-/* 
+/*
  * solve.h - header file for solve.c that contains functions to solve a sudoku
- * 
+ *
  * Devon Starr, Annie Tang, Amanda Sun, CS50 Spring 2022
  */
 
@@ -22,15 +22,10 @@
 void solve(int (*arr)[9], bool *printedOneSolution);
 
 /*
- * solve, and print into a file
- *
- */
-void solve_into_file(int (*arr)[9], bool *printedOneSolution, char *filename);
-/* 
- * checkGrid: 
- * checks if the grid inputted to solve is valid 
+ * checkGrid:
+ * checks if the grid inputted to solve is valid
  * integers are 0-9 and is a 9 by 9 grid
- */ 
+ */
 bool checkGrid(int (*arr)[9]);
 
 #endif // __SOLVE_H

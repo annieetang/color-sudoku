@@ -71,47 +71,6 @@ void solve(int (*arr)[9], bool *printedOneSolution)
     printGrid(arr);
 }
 
-/* see solve.h for description */
-void solve_into_file(int (*arr)[9], bool *printedOneSolution, char *filename)
-{
-    // check if valid grid
-    if (!checkGrid(arr))
-    {
-        fprintf(stderr, "Invalid grid. Values must be betwen 0-9 \n");
-        return;
-    }
-
-    // check if there's already a solution printed for array
-    if (*printedOneSolution)
-    {
-        return;
-    }
-
-    // loop through 2d array, trying numbers 1-9 on each cell and recursively calling solve again
-    for (int y = 0; y < 9; y++)
-    {
-        for (int x = 0; x < 9; x++)
-        {
-            if (arr[y][x] == 0)
-            {
-                for (int n = 1; n < 10; n++)
-                {
-                    if (possible(arr, y, x, n))
-                    {
-                        arr[y][x] = n;
-                        solve_into_file(arr, printedOneSolution, filename);
-                        arr[y][x] = 0;
-                    }
-                }
-                return;
-            }
-        }
-    }
-    // set printed bool to true and print the grid
-    *printedOneSolution = true;
-    printGrid_into_file(arr, filename);
-}
-
 /********************************************************
  **************** unit testing **************************
  ********************************************************/
