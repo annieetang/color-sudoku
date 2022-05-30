@@ -31,6 +31,8 @@ clean:
 	rm -rf *.dSYM  # MacOS debugger info
 	rm -f *~ *.o
 	rm -f $(PROGS)
+	rm -f unittestc
+	rm -f unittests
 
 valgrind: $(PROGS)
 	valgrind --leak-check=full --show-leak-kinds=all ./sudoku create | ./sudoku solve
@@ -42,4 +44,4 @@ units: unittests
 	./unittests
 
 test: $(PROGS)
-	./sudoku create | ./sudoku solve
+	./testing.sh
