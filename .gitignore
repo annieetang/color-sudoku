@@ -1,2 +1,6 @@
 *.o
 sudoku
+output 
+*.dSYM
+unittestc
+unittests
