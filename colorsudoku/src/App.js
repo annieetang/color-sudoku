@@ -98,7 +98,7 @@ function App() {
             return;
         }
         setSelected({ row: row, column: column });
-        setInfoText("Informative text.")
+        setInfoText("You got this.")
     }
 
     function solve(arr, printedOneSolution) {
@@ -255,7 +255,7 @@ function App() {
 
     // function to solve sudoku
     function solveSudoku() {
-        setInfoText("Solved puzzle:")
+        setInfoText("Solved puzzle.")
         let printed = { bool: false };
         solve(getDeepCopy(puzzle), printed);
     }
@@ -263,7 +263,17 @@ function App() {
     // function to reset sudoku
     function resetSudoku() {
         setPuzzle(getDeepCopy(grid));
-        setInfoText("Informative text.");
+        let filled = true;
+        for (let x = 0; x < 9; x++) {
+            for (let y = 0; y < 9; y++) {
+                if (grid[y][x] === 0) filled = false;
+            }
+        }
+        if (filled === true) {
+            setInfoText("Click create to generate a new puzzle.");
+        } else {
+            setInfoText("Puzzle reset.");
+        }
     }
 
     // function to check sudoku
