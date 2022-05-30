@@ -13,7 +13,7 @@
 # the number is zero (meaning it was not already filled) and it is possible for
 # that number to go there according to the sudoku rules.
 # 
-# Devon Starr, Annie Tang, & Amanda Sun
+# Devon, Annie, Amanda
 # CS50 Spring 2022
 
 

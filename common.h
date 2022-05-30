@@ -1,6 +1,6 @@
-/* 
+/*
  * common.h - header file for common.c that contains functions shared by create and solve
- * 
+ *
  * Devon Starr, Annie Tang, Amanda Sun, CS50 Spring 2022
  */
 
@@ -16,17 +16,6 @@
  * in a grid with spaces in between
  */
 void printGrid(int (*arr)[9]);
-
-/* checks if this is a writeable file
- */
-bool w_file(char *filename);
-
-/*
- * printGrid:into a file specified by filepath
- * loops through the 2d sudoku grid and prints the elements
- * in a grid with spaces in between
- */
-void printGrid_into_file(int (*arr)[9], char *filename);
 
 /*
  * possible:

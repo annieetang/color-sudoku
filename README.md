@@ -4,44 +4,53 @@
 
 ## Members: Devon Starr, Amanda Sun, Annie Tang
 
-### To run colorsudoku
-
-Mac users:
-
-* install `node` first
-    * to check if you have `node`, in terminal type `node -v`
-    * if no version exists, `brew install node`
-* try `npm start`
-    * if this works, then the app should run
-    * if not, `npm install react-scripts --save`
-    * afterwards, try `npm start` again, and it should work
-
 ### Usage
-The *querier* must be called with `make` and then `./querier pageDir fileName`. The user will continue to enter input, until control-D or control-C are pressed. The input will be searched if it follows this output:
-- no literals in the beginning, end, or sequentially
-- no non-alpha, non-space characters 
-- no empty lines or enters
+`sudoku` must be called with `make` and then `./sudoku [create|solve]`.
 
-If any of those cases occur, an error statement will be printed and the user will be prompted for another query.
+To clean up files, run `make clean`
 
-To generate random test cases, *fuzzquery* must be called with `make all` and then `fuzzquery filename number seed`
-
-The `testing.sh` file assumes there is a data and tse-output folder on the same hierarchy as querier.
+See `TESTING.md` for information about tests and how to run them.
 
 ### Assumptions
 
-For querier:
-* The doc_id is not more than 3 digits.
-* The sub-methods assume that the arguments are valid and non-NULL. This is because the main checks these arguments before allowing the next function to proceed.
+For solver:
+* Sudoku grid is inputted in the correct format - 9 rows of 9 integers separated by spaces, as seen in `testfiles/input1.txt`, for example.
+
 
 ### Files
 * `.gitignore` - ignores files
-* `REQUIREMENTS.md` – given for the Lab 6
-* `DESIGN.md`- abstract details, pseudocode, APIs
-* `IMPLEMENTATION.md` - specific, hardware and language-type implementation
+* `DESIGN.md`- general plan for project including UI, IO, functions, modules, pseudo code, and data structures
+* `IMPLEMENTATION.md` - specific, hardware and language-type implementation of design
 * `Makefile`- see Usage
-* `README.md`- this
-* `fuzzquery.c`- produces test text from source files
-* `querier.c` - the main code
-* `testing.sh`- test querier using fuzzquery
-* `testing.out` - output of testing.sh
+* `README.md`- this file
+* `common.c` & `common.c`- functions used by more than one of `sudoku.c`, `solve.c`, and `create.c`
+* `create.c` * `create.h` - functions for creating a sudoku puzzle
+* `solve.c` * `solve.h` - functions for solving a sudoku puzzle
+* `testing.sh`- fuzz testing and some specific test cases for solver
+* `unittests.h` & `unittestc.h` - header files used for unit testing
+* `testfiles/input*.txt` - text files that store unsolved sudoku puzzled, used to test solver
+* `testfiles/answer*.txt` - text files that store sudoku solutions, used to test solver
+
+
+### Extra Credit Files
+#### In `/colorsudoku/src`:
+* `App.js` - includes all of the html elements for displaying the app, and also all of the javascript for functionality. javascript functions were adapted from our `sudoku.c`, `solve.c`, and `create.c`.
+* `App.css` - all styling for elements in our react app
+* all other files in `/colorsudoku` were auto generated and not edited by our team
+
+
+
+# Extra Credit!
+
+For extra credit our team made a react app where you can play sudoku, but with *colors*!
+
+### To run colorsudoku locally,
+
+* make sure `node.js` is installed
+    * to check if you have `node`, in terminal type `node -v`
+    * if no version exists, `brew install node` for mac users or just download it from the internet for windows users
+* cd into `colorsudoku` folder
+* run `npm install` to install the `/node_modules` folder
+* run `npm start` to host the app locally in your browser!
+
+## Color sudoku hosted website -----> https://colorsudoku.netlify.app/
