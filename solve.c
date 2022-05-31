@@ -159,6 +159,29 @@ int test_sudokusolve2()
     return TEST_RESULT;
 }
 
+// input grid with invalid sudoku
+int test_sudokusolve3()
+{
+    START_TEST_CASE("sudokusolve3");
+
+    int a[9][9] = {
+        {2, 0, 0, 2, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0}};
+
+    bool printed = false;
+    solve(a, &printed);
+
+    END_TEST_CASE;
+    return TEST_RESULT;
+}
+
 int main(const int argc, const char *argv[])
 {
     int failed = 0;
@@ -166,6 +189,7 @@ int main(const int argc, const char *argv[])
     failed += test_sudokusolve0();
     failed += test_sudokusolve1();
     failed += test_sudokusolve2();
+    failed += test_sudokusolve3();
 
     if (failed)
     {

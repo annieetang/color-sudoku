@@ -25,6 +25,7 @@ void solve(int (*arr)[9], bool *printedOneSolution);
  * checkGrid:
  * checks if the grid inputted to solve is valid
  * integers are 0-9 and is a 9 by 9 grid
+ * or if sudoku violates any rules (two 2's in the same column for ex)
  */
 bool checkGrid(int (*arr)[9]);
 
