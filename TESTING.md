@@ -15,7 +15,7 @@ Also included in `testing.sh` are a few hard-coded sudoku tests, where a puzzle 
 
 Output:
 
-```
+```bash
 $ make test
 ./testing.sh
 
@@ -147,7 +147,7 @@ To unit test `solve`, `make units`
 
 Output:
 
-```
+```bash
 $ make unitc
 ./unittestc
 0 0 0 0 2 0 4 0 9 
@@ -164,7 +164,7 @@ PASS test create
 PASS all test cases
 ```
 
-```
+```bash
 $ make units
 ./unittests
 Solved sudoku:

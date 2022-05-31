@@ -1,6 +1,9 @@
-# Detailed pseudo code for each of the functions:
+# Implementation
+
+## Detailed pseudo code for each of the functions
 
 `int main(int argc, char const *argv[])`
+
 ```
 returns nonzero and prints error if the the wrong number of command-line arguments are given
 if first and only argument is "create",
@@ -19,9 +22,10 @@ if first and only argument is "solve",
 returns nonzero and prints error for incorrect arguments
 ```
 
-# Pseudocode used in both `./sudoku create` and `./sudoku solve`
+## Pseudocode used in both `./sudoku create` and `./sudoku solve`
 
 `bool possible(int (*arr)[9], int y, int x, int num)`
+
 ```
 for each array index in the row at x,y
     if the array element at the given y value and the row index is equal to the number specified,
@@ -37,9 +41,10 @@ for i 0 to 2
 return true
 ```
 
-# Pseudocode for functions only used for `./sudoku create`:
+## Pseudocode for functions only used for `./sudoku create`
 
 `void solutionCounter(int (*arr)[9], int *solutions)`
+
 ```
 if value at solutions pointer is at least 2,
     return early
@@ -57,6 +62,7 @@ adds 1 to value at solutions pointer
 ```
 
 `void generatePuzzle()`
+
 ```
 creates empty sudoku array
 sets all elements in 2d array to zero
@@ -83,6 +89,7 @@ uses generatePuzzleHelper to solve the puzzle and then remove values from it, pa
 ```
 
 `void generatePuzzleHelper(int (*arr)[9], bool *created)`
+
 ```
 if value at bool pointer given is true,
     returns early
@@ -113,9 +120,10 @@ while times is less than or equal to maxTimes,
 print the 2d sudoku array
 ```
 
-# Pseudocode for function used in `./sudoku solve`
+## Pseudocode for function used in `./sudoku solve`
 
 `void solve(int (*arr)[9], bool *printedOneSolution)`
+
 ```
 if value at printedOneSolution pointer is true,
     return early
@@ -133,8 +141,10 @@ sets value at printedOneSolution equal to true
 prints solved sudoku grid
 ```
 
-# Detailed APIs used:
-## from `stdlib.h`:
+## Detailed APIs used
+
+### from `stdlib.h`
+
 ```c
 /**************** rand ****************/
 /*
@@ -152,7 +162,8 @@ int rand();
 void srand(unsigned int seed);
 ```
 
-## from `time.h`:
+### from `time.h`
+
 ```c
 /**************** time ****************/
 /*
@@ -162,11 +173,10 @@ void srand(unsigned int seed);
  * on the current time so that each time program runs it generates different numbers
  */
 time_t time( time_t *second );
-
 ```
-#
 
-# Data structures 
+## Data structures
+
 the only data structure used in *sudoku.c* is an `int[9][9]` to represent the sudoku puzzle.
 
 when `./sudoku create` is run it creates an `int[9][9]` initially filled with zeros, solves it, and removes some numbers.
