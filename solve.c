@@ -13,7 +13,7 @@
 /* see solve.h for description */
 bool checkGrid(int (*arr)[9])
 {
-
+    // testing for bad values
     for (int x = 0; x < 9; x++)
     {
         for (int y = 0; y < 9; y++)
@@ -23,6 +23,19 @@ bool checkGrid(int (*arr)[9])
             {
                 return false;
             }
+
+            int temp = arr[y][x];
+
+            if (temp == 0)
+                continue;
+
+            arr[y][x] = 0;
+            if (!possible(arr, y, x, temp))
+            {
+                arr[y][x] = temp;
+                return false;
+            }
+            arr[y][x] = temp;
         }
     }
 
@@ -35,7 +48,7 @@ void solve(int (*arr)[9], bool *printedOneSolution)
     // check if valid grid
     if (!checkGrid(arr))
     {
-        fprintf(stderr, "Invalid grid. Values must be betwen 0-9 \n");
+        fprintf(stderr, "Invalid grid. Values must be betwen 0-9 and follow sudoku rules. \n");
         return;
     }
 

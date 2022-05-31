@@ -51,6 +51,8 @@ int main(int argc, char const *argv[])
         }
         bool printed = false;
         solve(a, &printed);
+        if (!printed)
+            printf("No solution.\n");
         return 0;
     }
 
