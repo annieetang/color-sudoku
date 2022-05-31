@@ -87,7 +87,7 @@ The sudoku completes and exits when it has finished solving and printing out the
 
 ### Testing plan
 
-*Unit testing*. A small test program to test each module to make sure it does what it's supposed to do. Modules: creating the sudoku, solving the sudoku.
+*Unit testing*. A small test program to test each module to make sure it does what it's supposed to do. Modules: creating the sudoku, solving the sudoku. Can be found in `create.c` and `solve.c`.
 
 *Fuzz testing*. Use the creator to generate **n** puzzles, where **n** is a command-line argument and test solver for these grids. Check the following:
 	- The solution is valid, i.e, it follows Sudoku rules and doesn’t change already filled cells in the grids
